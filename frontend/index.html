@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarcasm Detector</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-icon">S</div>
+      <div>
+        <div class="brand-name">Sarcasm Detector</div>
+        <div class="brand-sub">BiLSTM + Attention • Context-aware NLP</div>
+      </div>
+    </div>
+    <div class="status-pill"><span class="dot"></span><span id="statusText">Model ready</span></div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">AI TEXT ANALYSIS</span>
+        <h1>Is the message <span>sarcastic?</span></h1>
+        <p>Enter a previous message for context and the reply you want to analyze. The model returns a sarcasm score and the words receiving the most attention.</p>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-label">MODEL</div>
+        <div class="hero-card-value">ContextAttentionLSTM</div>
+        <div class="hero-card-small">Bidirectional LSTM with attention</div>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="panel input-panel">
+        <div class="panel-head">
+          <div><span class="step">01</span><h2>Conversation</h2></div>
+          <button class="ghost-btn" id="clearBtn">Clear</button>
+        </div>
+
+        <label for="context">Previous message <span>(optional)</span></label>
+        <textarea id="context" rows="4" placeholder="Example: The server crashed again."></textarea>
+
+        <label for="comment">Comment to analyze</label>
+        <textarea id="comment" rows="5" placeholder="Example: Oh wonderful, exactly what I needed today."></textarea>
+
+        <div class="example-row">
+          <button class="example" data-context="The server crashed again." data-comment="Oh wonderful, exactly what I needed today.">Try sarcastic</button>
+          <button class="example" data-context="The server is running normally." data-comment="I will check the logs anyway.">Try normal</button>
+          <button class="example" data-context="We have another 3 hour meeting." data-comment="Amazing, I just love wasting my entire day.">Try subtle</button>
+        </div>
+
+        <button class="analyze-btn" id="analyzeBtn">
+          <span id="btnText">Analyze message</span><span class="arrow">→</span>
+        </button>
+        <div class="hint">Press Ctrl + Enter to analyze</div>
+      </div>
+
+      <div class="panel result-panel">
+        <div class="panel-head">
+          <div><span class="step">02</span><h2>Prediction</h2></div>
+          <span class="badge" id="labelBadge">Waiting</span>
+        </div>
+
+        <div class="score-wrap">
+          <div class="score-ring" id="scoreRing"><div><strong id="score">--</strong><span>score</span></div></div>
+          <div class="score-copy">
+            <div class="prediction-title" id="predictionTitle">Enter a message</div>
+            <p id="predictionText">Your prediction will appear here after analysis.</p>
+          </div>
+        </div>
+
+        <div class="bar-section">
+          <div class="bar-label"><span>Sarcasm probability</span><strong id="probability">--</strong></div>
+          <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+        </div>
+
+        <div class="attention-section">
+          <div class="section-title">Top attention words <span>what the model focused on</span></div>
+          <div class="chips" id="attentionWords"><span class="empty">No prediction yet</span></div>
+        </div>
+
+        <div class="raw-result" id="rawResult">Ready for your first test.</div>
+      </div>
+    </section>
+
+    <section class="info-grid">
+      <div class="info-card"><div class="info-icon">01</div><h3>Context-aware</h3><p>Uses the previous message to understand sarcasm that depends on conversation context.</p></div>
+      <div class="info-card"><div class="info-icon">02</div><h3>Attention</h3><p>Shows words that received higher attention during the prediction.</p></div>
+      <div class="info-card"><div class="info-icon">03</div><h3>Live-ready</h3><p>The same trained model can be used by the project's live chat demo.</p></div>
+    </section>
+
+    <footer>Contextual Sarcasm Detection • Project Frontend</footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
